@@ -6,20 +6,22 @@ import visibilityIcon from '../assets/assets/svg/visibilityIcon.svg';
 function SignIn() {
   const [showPassword, setShowPassword] = useState(false);
   const [formData, setFormData] = useState({
-    displayName: '',
+    // displayName: '',
     email: '',
     password: '',
   });
   //destructure to use below
-  const { email, password, displayName } = formData;
+  const { email, password } = formData;
 
   const navigate = useNavigate();
 
   const onChange = (e) => {
-    setFormData({
-      ...formData,
+    e.preventDefault();
+    setFormData((previousState) => ({
+      ...previousState,
+
       [e.target.id]: e.target.value,
-    });
+    }));
   };
 
   return (
@@ -57,9 +59,17 @@ function SignIn() {
                 onClick={() => setShowPassword((prevState) => !prevState)}
               />
             </div>
-
-            <button type='submit'>Submit</button>
+            <Link to='/forgot-password' className='forgotPasswordLink'>
+              Forgot Password
+            </Link>
+            <div className='signInBar'>
+              <p className='signInText'>Sign In </p>
+            </div>
           </form>
+          {/*Google OAuth */}
+          <Link to='/sign-up' className='registerLink'>
+            Sign Up Instead
+          </Link>
         </main>
       </div>
     </>
